@@ -1,0 +1,5 @@
+git+https://github.com/devopsarr/sonarr-py.git
+lxml
+prometheus_client
+requests
+flask
