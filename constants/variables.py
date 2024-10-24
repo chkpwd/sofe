@@ -18,6 +18,10 @@ import os
 import sys
 import logging
 
+from dotenv import load_dotenv
+
+
+load_dotenv(dotenv_path=".env.priv")
 
 logging.basicConfig(level=logging.INFO)
 
@@ -38,7 +42,9 @@ class UserConfig:
             "SONARR_SERIES_ID", required=True, default=""
         ))
         self.sonarr_api_key: str = self._get_env_var("SONARR_API_KEY", required=True)
-
+        self.monitor_sonarr_episodes: bool = bool(
+            self._get_env_var("MONITOR_NON_FILLER_EPISODES", default=""
+        ))
         self.plex_url: str = self._get_env_var("PLEX_URL")
         self.plex_token: str = self._get_env_var(
             "PLEX_TOKEN", required=bool(self.plex_url)
