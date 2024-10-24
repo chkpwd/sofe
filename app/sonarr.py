@@ -1,10 +1,12 @@
-import os
 import sonarr
 import logging
 
+from constants.variables import UserConfig
 
-CONFIGURATION = sonarr.Configuration(host="https://sonarr.local.chkpwd.com")
-CONFIGURATION.api_key["X-Api-Key"] = os.environ["SONARR_API_KEY"]
+var = UserConfig()
+
+CONFIGURATION = sonarr.Configuration(host=var.sonarr_url)
+CONFIGURATION.api_key["X-Api-Key"] = var.sonarr_api_key
 
 
 def get_sonarr_episodes(series_id: int):
@@ -13,7 +15,6 @@ def get_sonarr_episodes(series_id: int):
 
     with sonarr.ApiClient(configuration=CONFIGURATION) as api_client:
         api_instance = sonarr.EpisodeApi(api_client)
-        series_id = series_id
 
         try:
             api_response = api_instance.list_episode(series_id=series_id)
@@ -23,8 +24,10 @@ def get_sonarr_episodes(series_id: int):
                     {
                         "id": item.id,
                         "title": item.title,
-                        "number": item.absolute_episode_number,
+                        "season": item.season_number,
                         "monitored": item.monitored,
+                        "episode_number": item.episode_number,
+                        "absolute_episode_number": item.absolute_episode_number
                     }
                 )
 
@@ -34,13 +37,13 @@ def get_sonarr_episodes(series_id: int):
         return episodes
 
 
-def configure_monitoring(episodes: list):
+def configure_monitoring(monitored_list: list):
     """Configure the sonarr episodes to be monitored."""
     with sonarr.ApiClient(configuration=CONFIGURATION) as api_client:
         api_instance = sonarr.EpisodeApi(api_client)
 
         episodes_monitored_resource = sonarr.EpisodesMonitoredResource(
-            episodeIds=[*episodes]
+            episodeIds=[*monitored_list]
         )
         episodes_monitored_resource.monitored = True
 

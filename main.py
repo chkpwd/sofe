@@ -5,7 +5,13 @@ import logging
 from flask import Flask, jsonify
 from app.parser import get_anime_filler_list
 from app.sonarr import configure_monitoring, get_sonarr_episodes
-from constants.logging import LOG_LEVELS
+from app.plex import create_plex_collection
+
+from constants.logger import LOG_LEVELS
+from constants.variables import UserConfig
+
+
+var = UserConfig()
 
 log_level = os.environ.get("LOG_LEVEL", "INFO").upper()
 
@@ -20,46 +26,27 @@ app = Flask(__name__)
 @app.route("/fillers", methods=["GET"])
 def get_filler_list():
     """Returns the filler list for the specified anime."""
-    filler_list = get_anime_filler_list(anime_name=os.environ["ANIME_NAME"])
+    filler_list = get_anime_filler_list(anime_name=var.anime_name)
     return jsonify({"value": filler_list})
 
 if __name__ == "__main__":
+    episodes_to_monitor = []
+
     logging.info("Initializing SOFE API...")
-    result  = []
+    logging.info("Address is set to '%s'", var.listen_address)
+    logging.info("Port is set to '%s'", var.listen_port)
 
-    listen_address = os.environ.get("ADDRESS", "0.0.0.0")
-    listen_port = os.environ.get("PORT", 7979)
+    fillers_from_api = get_anime_filler_list(var.anime_name)
+    sonarr_episodes = get_sonarr_episodes(int(var.sonarr_series_id))
 
-    if not os.environ.get("ANIME_NAME"):
-        logging.error("ANIME_NAME must be set")
-        sys.exit(1)
+    if var.create_plex_collection is True:
+        create_plex_collection(sonarr_episodes=sonarr_episodes, fillers=fillers_from_api)
 
-    if not os.environ.get("SONARR_SERIES_ID"):
-        logging.error("SERIES_ID must be set")
-        sys.exit(1)
+    for episode in sonarr_episodes:
+        if episode['number'] not in fillers_from_api:
+            episodes_to_monitor.append(episode.get('id'))
 
-    if not os.environ.get("SONARR_API_KEY"):
-        logging.error("SONARR_API_KEY not set")
-        sys.exit(1)
+    logging.debug("Non-Filler Episodes: %s", episodes_to_monitor)
+    configure_monitoring(monitored_list=episodes_to_monitor)
 
-    if not os.environ.get("ADDRESS"):
-        logging.info("Address is not set. Defaulting to 0.0.0.0.")
-    else:
-        logging.info("Address is set to '%s'", listen_address)
-
-    if not os.environ.get("PORT"):
-        logging.info("Port is not set. Defaulting to 7979.")
-    else:
-        logging.info("Port is set to '%s'", listen_port)
-
-    fillers = get_anime_filler_list(os.environ["ANIME_NAME"])
-    episodes = get_sonarr_episodes(int(os.environ["SONARR_SERIES_ID"]))
-
-    for episode in episodes:
-        if episode['number'] not in fillers:
-            result.append(episode.get('id'))
-
-    configure_monitoring(result)
-
-    app.run(host=listen_address, port=int(listen_port))
-
+    app.run(host=var.listen_address, port=var.listen_port)

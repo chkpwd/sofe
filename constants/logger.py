@@ -1,6 +1,6 @@
 import logging
 
-LOG_LEVELS = {
+LOG_LEVELS: dict[str, int] = {
     "DEBUG": logging.DEBUG,
     "INFO": logging.INFO,
     "WARNING": logging.WARNING,
