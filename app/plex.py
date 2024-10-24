@@ -12,13 +12,14 @@ logging.basicConfig(level=logging.INFO)
 
 plex = PlexServer(baseurl=var.plex_url, token=var.plex_token)
 
+
 def create_plex_collection(sonarr_episodes: list[int], fillers: list[int] = []):
     nonfillers_items: list[Episode] = []
     fillers_items: list[Episode] = []
 
     media: ShowSection = plex.library.section(title=var.plex_anime_library)
 
-    shows: MediaContainer = media.search(title=var.anime_name)
+    shows: MediaContainer = media.search(title=var.afl_anime_name)
 
     for show in shows:
         plex_episodes: list[Episode] = show.episodes()

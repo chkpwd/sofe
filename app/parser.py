@@ -3,10 +3,10 @@ import logging
 import requests
 
 
-def get_anime_filler_list(anime_name: str):
+def get_anime_filler_list(afl_anime_name: str):
     """Get the anime filler list."""
 
-    base_url = f"https://www.animefillerlist.com/shows/{anime_name}/"
+    base_url = f"https://www.animefillerlist.com/shows/{afl_anime_name}/"
     url = f"{base_url}"
     data = html.fromstring(requests.get(url).content)
     filler_ranges = data.xpath(

@@ -14,6 +14,9 @@ The SoFE (Sonarr Anime Filler Excluder) is a Python application designed to coll
 - Docker / Docker Compose
 - Prometheus server setup for collecting metrics. (Optional)
 
+> [!Note] Make sure to obtain the anime name from [Anime Filler List](https://www.animefillerlist.com/).
+![alt text](image.png)
+
 ## Installation
 
 The SoFE can be easily run as a container. This section covers pulling the Container Image from the GitHub Container Registry and running it.
@@ -27,11 +30,16 @@ docker pull ghcr.io/chkpwd/sofe:latest
 Run the container:
 ```sh
 docker run --rm -p 7979:7979 \
-  -e SONARR_SERIES_ID=187 \
-  -e ANIME_NAME="one-piece" \
-  -e SONARR_API_KEY="your_api_key" \
+  -e SONARR_URL="https://sonarr.local" \
+  -e SONARR_API_KEY="<your_api_key>" \
+  -e SONARR_SERIES_ID="187" \
+  -e AFL_ANIME_NAME="one-piece" \
+  -e PLEX_URL="http://127.0.0.1:32400" \
+  -e PLEX_TOKEN="<your_plex_token>" \
+  -e CREATE_PLEX_COLLECTION="True" \
+  -e MONITOR_NON_FILLER_SONARR_EPISODES="True" \
+  -e PLEX_ANIME_LIBRARY="<your_plex_anime_library>" \
   ghcr.io/chkpwd/sofe:latest
-```
 Alternatively, create docker-compose.yml file with the following content:
 ```yaml
 version: '3.8'
@@ -41,17 +49,18 @@ services:
     ports:
       - "7979:7979"
     environment:
-      SONARR_SERIES_ID: 187
-      ANIME_NAME: "one-piece"
-      SONARR_API_KEY: "your_api_key"
+      SONARR_URL: "https://sonarr.local"
+      SONARR_API_KEY: "<your_api_key>"
+      SONARR_SERIES_ID: "187"
+      AFL_ANIME_NAME: "one-piece"
+      PLEX_URL: "http://127.0.0.1:32400"
+      PLEX_TOKEN: "<your_plex_token>"
+      CREATE_PLEX_COLLECTION: "True"
+      MONITOR_NON_FILLER_SONARR_EPISODES: "True"
+      PLEX_ANIME_LIBRARY: "<your_plex_anime_library>"
+
 ```
 Then run with:
 ```sh
 docker-compose up -d
-```
-Accessing Data (Not done yet)
-
-With the container running, you can access the exposed metrics by navigating to http://localhost:5000/fillers in your web browser or using a tool like curl:
-```sh
-curl http://<ip-address>:5000/fillers
 ```

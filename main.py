@@ -28,15 +28,17 @@ if __name__ == "__main__":
     logging.info("Address is set to '%s'", var.listen_address)
     logging.info("Port is set to '%s'", var.listen_port)
 
-    fillers_from_api = get_anime_filler_list(var.anime_name)
+    fillers_from_api = get_anime_filler_list(var.afl_anime_name)
     sonarr_episodes_id = get_sonarr_episodes(int(var.sonarr_series_id))
 
     if var.create_plex_collection is True:
-        create_plex_collection(sonarr_episodes=sonarr_episodes_id, fillers=fillers_from_api)
+        create_plex_collection(
+            sonarr_episodes=sonarr_episodes_id, fillers=fillers_from_api
+        )
 
     for episode in sonarr_episodes_id:
-        if episode['episode_number'] not in fillers_from_api:
-            episodes_to_monitor.append(episode.get('id'))
+        if episode["episode_number"] not in fillers_from_api:
+            episodes_to_monitor.append(episode.get("id"))
 
     logging.debug("Non-Filler Episodes: %s", episodes_to_monitor)
 
