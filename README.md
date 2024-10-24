@@ -14,8 +14,9 @@ The SoFE (Sonarr Anime Filler Excluder) is a Python application designed to coll
 - Docker / Docker Compose
 - Prometheus server setup for collecting metrics. (Optional)
 
-> [!Note] Make sure to obtain the anime name from [Anime Filler List](https://www.animefillerlist.com/).
-![alt text](image.png)
+> [!Note]
+> Make sure to obtain the anime name from [Anime Filler List](https://www.animefillerlist.com/).
+> ![alt text](image.png)
 
 ## Installation
 
