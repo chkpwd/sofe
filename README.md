@@ -16,7 +16,8 @@ The SoFE (Sonarr Anime Filler Excluder) is a Python application that configures 
 
 > [!Note]
 > Make sure to obtain the anime name from [Anime Filler List](https://www.animefillerlist.com/) URL.
-> ![alt text](image.png)
+
+![alt text](image.png)
 
 ## Installation
 
