@@ -8,6 +8,7 @@ Attributes:
     sonarr_url (str): The URL of the Sonarr server.
     sonarr_series_id (int): The ID of the Sonarr series to update.
     sonarr_api_key (str): The API key for the Sonarr server.
+    monitor_non_filler_sonarr_episodes (bool): Whether or not to monitor non-filler episodes. Defaults to False.
     plex_url (str): The URL of the Plex server. Optional.
     plex_token (str): The token for the Plex server. Optional.
     create_plex_collection (bool): Whether or not to create a Plex collection for the anime. Defaults to False.
@@ -42,8 +43,8 @@ class UserConfig:
             "SONARR_SERIES_ID", required=True, default=""
         ))
         self.sonarr_api_key: str = self._get_env_var("SONARR_API_KEY", required=True)
-        self.monitor_sonarr_episodes: bool = bool(
-            self._get_env_var("MONITOR_NON_FILLER_EPISODES", default=""
+        self.monitor_non_filler_sonarr_episodes: bool = bool(
+            self._get_env_var("MONITOR_NON_FILLER_SONARR_EPISODES", default=""
         ))
         self.plex_url: str = self._get_env_var("PLEX_URL")
         self.plex_token: str = self._get_env_var(
