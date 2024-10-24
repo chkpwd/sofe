@@ -1,6 +1,6 @@
 # SoFE (Sonarr Anime Filler Excluder)
 
-The SoFE (Sonarr Anime Filler Excluder) is a Python application designed to collect real-time anime data from [AnimeFillerList](https://www.animefillerlist.com/), such as filler episodes, and configure Anime to only monitor non-filler episodes. Additionally, expose data as metrics that can be scraped by Prometheus. As well, in conjunction with visualization tools like Grafana.
+The SoFE (Sonarr Anime Filler Excluder) is a Python application that configures Sonarr to monitor only non-filler anime episodes sourced from [AnimeFillerList](https://www.animefillerlist.com/). It also creates separate Plex collections for non-filler and filler episodes, depending on the download status.
 
 ## Features
 
