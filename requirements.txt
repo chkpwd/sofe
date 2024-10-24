@@ -3,3 +3,4 @@ lxml
 requests
 flask
 plexapi
+python-dotenv

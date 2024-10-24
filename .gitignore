@@ -9,7 +9,7 @@ __pycache__/
 vendor/
 
 # Environments
-.env
+.env.priv
 .venv
 env/
 venv/
