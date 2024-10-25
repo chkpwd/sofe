@@ -1,14 +1,14 @@
-import logging
-
 from plexapi.video import Episode
 from plexapi.server import PlexServer
 from plexapi.base import MediaContainer
 from plexapi.library import ShowSection
 from constants.variables import UserConfig
+from constants.logger import logger, log_level, LOG_LEVELS
 
+
+logger.setLevel(LOG_LEVELS[log_level])
 var = UserConfig()
 
-logging.basicConfig(level=logging.INFO)
 
 plex = PlexServer(baseurl=var.plex_url, token=var.plex_token)
 
@@ -43,4 +43,4 @@ def create_plex_collection(sonarr_episodes: list[int], fillers: list[int] = []):
                         items=items,
                     )
                 else:
-                    logging.info(f"No {collection_name.split(' - ')[1].lower()} found.")
+                    logger.info(f"No {collection_name.split(' - ')[1].lower()} found.")
