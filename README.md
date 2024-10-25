@@ -1,18 +1,26 @@
-# SoFE (Sonarr Anime Filler Excluder)
+<p align="center">
+  <img src="metadata/logo.png?raw=true" alt="Sofe's Logo"/>
+</p>
 
-The SoFE (Sonarr Anime Filler Excluder) is a Python application that configures Sonarr to monitor only non-filler anime episodes sourced from [AnimeFillerList](https://www.animefillerlist.com/). It also creates separate Plex collections for non-filler and filler episodes, depending on the download status.
+<p align="center" >
+  <picture><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/chkpwd/sofe?style=flat&logo=github&logoColor=white&label=Stars"></picture>
+  <picture><img alt="GitHub commit activity" src="https://img.shields.io/github/commit-activity/m/chkpwd/sofe?style=flat&logo=github&logoColor=white&label=COMMITS"></picture>
+  <picture><img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues-closed/chkpwd/sofe?style=flat&logo=github&logoColor=white"></picture>
+  <picture><img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/chkpwd/sofe?style=flat&logo=github&logoColor=white"></picture>
+  <picture><img alt="GitHub License" src="https://img.shields.io/github/license/chkpwd/sofe?style=flat"></picture>
+</p>
+SoFE (Sonarr Anime Filler Excluder) is a Python application that configures Sonarr to monitor only non-filler anime episodes sourced from [AnimeFillerList](https://www.animefillerlist.com/). It also creates separate Plex collections for non-filler and filler episodes, depending on the download status.
 
 ## Features
 
-- Fetch and expose information about filler episodes for various anime shows.
-- Expose anime-related metrics for monitoring and analysis.
-- Easy integration with Prometheus and Grafana for visualization and alerting.
+- Parses filler episodes from AnimeFillerList
+- Monitors non-filler episodes in Sonarr
+- Creates Plex Collections for non-filler and filler episodes
 
 ## Prerequisites
 
 - Sonarr
 - Docker / Docker Compose
-- Prometheus server setup for collecting metrics. (Optional)
 
 > [!Note]
 > Make sure to obtain the anime name from [Anime Filler List](https://www.animefillerlist.com/) URL.
