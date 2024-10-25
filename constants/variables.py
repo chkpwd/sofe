@@ -1,20 +1,3 @@
-"""
-Configuration constants for the application.
-
-Attributes:
-    listen_address (str): The IP address to listen on. Defaults to 0.0.0.0.
-    listen_port (int): The port to listen on. Defaults to 7979.
-    afl_anime_name (str): The name of the anime to fetch filler episodes for.
-    sonarr_url (str): The URL of the Sonarr server.
-    sonarr_series_id (int): The ID of the Sonarr series to update.
-    sonarr_api_key (str): The API key for the Sonarr server.
-    monitor_non_filler_sonarr_episodes (bool): Whether or not to monitor non-filler episodes. Defaults to False.
-    plex_url (str): The URL of the Plex server. Optional.
-    plex_token (str): The token for the Plex server. Optional.
-    create_plex_collection (bool): Whether or not to create a Plex collection for the anime. Defaults to False.
-    plex_anime_library (str): The name of the Plex library to add the anime collection to.
-"""
-
 import os
 import sys
 import logging
@@ -28,7 +11,22 @@ logging.basicConfig(level=logging.INFO)
 
 
 class UserConfig:
-    """Configuration constants for the application."""
+    """
+    Configuration constants for the application.
+
+    Attributes:
+        listen_address (str): The IP address to listen on. Defaults to 0.0.0.0.
+        listen_port (int): The port to listen on. Defaults to 7979.
+        afl_anime_name (str): The name of the anime to fetch filler episodes for.
+        sonarr_url (str): The URL of the Sonarr server.
+        sonarr_series_id (int): The ID of the Sonarr series to update.
+        sonarr_api_key (str): The API key for the Sonarr server.
+        monitor_non_filler_sonarr_episodes (bool): Whether or not to monitor non-filler episodes. Defaults to False.
+        plex_url (str): The URL of the Plex server. Optional.
+        plex_token (str): The token for the Plex server. Optional.
+        create_plex_collection (bool): Whether or not to create a Plex collection for the anime. Defaults to False.
+        plex_anime_library (str): The name of the Plex library to add the anime collection to.
+    """
 
     def __init__(self):
         self.listen_address: str = self._get_env_var("ADDRESS", default="0.0.0.0")
