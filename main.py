@@ -40,5 +40,5 @@ if __name__ == "__main__":
 
     logging.debug("Non-Filler Episodes: %s", episodes_to_monitor)
 
-    if not episodes_to_monitor or var.monitor_non_filler_sonarr_episodes is True:
+    if episodes_to_monitor and var.monitor_non_filler_sonarr_episodes is True:
         configure_monitoring(monitored_list=episodes_to_monitor)
