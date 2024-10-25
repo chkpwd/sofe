@@ -1,6 +1,5 @@
 import os
 import sys
-import attrs
 import logging
 
 from attrs.converters import to_bool
