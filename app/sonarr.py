@@ -43,9 +43,9 @@ def configure_monitoring(monitored_list: list):
         api_instance = sonarr.EpisodeApi(api_client)
 
         episodes_monitored_resource = sonarr.EpisodesMonitoredResource(
-            episodeIds=[*monitored_list]
+            episodeIds=[*monitored_list],
+            monitored=True
         )
-        episodes_monitored_resource.monitored = True
 
         try:
             api_instance.put_episode_monitor(

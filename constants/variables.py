@@ -1,7 +1,9 @@
 import os
 import sys
+import attrs
 import logging
 
+from attrs.converters import to_bool
 from dotenv import load_dotenv
 
 
@@ -34,18 +36,16 @@ class UserConfig:
         self.afl_anime_name: str = self._get_env_var("AFL_ANIME_NAME", required=True)
         self.sonarr_url: str = self._get_env_var("SONARR_URL", required=True)
         self.sonarr_series_id: int = int(
-            self._get_env_var("SONARR_SERIES_ID", required=True, default="")
+            self._get_env_var("SONARR_SERIES_ID", required=True)
         )
         self.sonarr_api_key: str = self._get_env_var("SONARR_API_KEY", required=True)
-        self.monitor_non_filler_sonarr_episodes: bool = bool(
-            self._get_env_var("MONITOR_NON_FILLER_SONARR_EPISODES", default="")
+        self.monitor_non_filler_sonarr_episodes: bool = to_bool(
+            self._get_env_var("MONITOR_NON_FILLER_SONARR_EPISODES", required=True, default="True")
         )
         self.plex_url: str = self._get_env_var("PLEX_URL")
-        self.plex_token: str = self._get_env_var(
-            "PLEX_TOKEN", required=bool(self.plex_url)
-        )
-        self.create_plex_collection: bool = bool(
-            self._get_env_var("CREATE_PLEX_COLLECTION", default="")
+        self.plex_token: str = self._get_env_var("PLEX_TOKEN")
+        self.create_plex_collection: bool = to_bool(
+            self._get_env_var("CREATE_PLEX_COLLECTION", required=True, default="False")
         )
         self.plex_anime_library: str = self._get_env_var("PLEX_ANIME_LIBRARY")
 
