@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.INFO)
 plex = PlexServer(baseurl=var.plex_url, token=var.plex_token)
 
 
-def create_plex_collection(sonarr_episodes: list[int], fillers: list[int] = []):
+def create_plex_collection(fillers: list[int] = []):
     nonfillers_items: list[Episode] = []
     fillers_items: list[Episode] = []
 
