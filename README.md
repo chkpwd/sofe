@@ -20,6 +20,7 @@ SoFE (Sonarr Anime Filler Excluder) is a Python application that configures Sona
 ## Prerequisites
 
 - Sonarr
+- Plex
 - Docker / Docker Compose
 
 > [!Note]
