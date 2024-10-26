@@ -20,17 +20,15 @@ def get_sonarr_episodes(series_id: int):
             api_response = api_instance.list_episode(series_id=series_id)
 
             for item in api_response:
-                episodes.append(
-                    {
+                if item.season_number != 0:
+                    episodes.append({
                         "id": item.id,
                         "title": item.title,
                         "season": item.season_number,
                         "monitored": item.monitored,
                         "episode_number": item.episode_number,
-                        "absolute_episode_number": item.absolute_episode_number
-                    }
-                )
-
+                        "absolute_episode_number": item.absolute_episode_number,
+                    })
         except Exception as e:
             logging.error("Exception when calling EpisodeApi->list_episode: %s\n" % e)
 
