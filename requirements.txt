@@ -1,6 +1,0 @@
-git+https://github.com/devopsarr/sonarr-py.git
-lxml
-requests
-flask
-plexapi
-python-dotenv

@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "sofe"
+description = "SoFE performs two primary functions: it monitors non-filler episodes in Sonarr and generates Plex collections."
+authors = ["Bryan Jones <unix.chkpwd@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.11"
+sonarr = {git = "https://github.com/devopsarr/sonarr-py.git", rev = "main"}
+lxml = "^5.3.0"
+requests = "^2.32.3"
+plexapi = "^4.15.16"
+python-dotenv = "^1.0.1"
+attrs = "^24.2.0"
+
+[build-system]
+requires = ["poetry-core>=1.8"]
+build-backend = "poetry.core.masonry.api"

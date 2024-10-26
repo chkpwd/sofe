@@ -1,25 +1,42 @@
-FROM python:3.12-slim-bookworm
+FROM python:3.12-slim-bookworm AS base
 
 ENV PYTHONUNBUFFERED=1 \
-    ADDRESS=0.0.0.0 \
-    PORT=7979 \
-    DEBUG=false
+PYTHONFAULTHANDLER=1 \
+PYTHONUNBUFFERED=1 \
+PYTHONHASHSEED=random
 
 WORKDIR /src
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    git \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+FROM base AS builder
 
-COPY requirements.txt .
+ENV PIP_NO_CACHE_DIR=off \
+PIP_DISABLE_PIP_VERSION_CHECK=on \
+PIP_DEFAULT_TIMEOUT=100 \
+POETRY_NO_INTERACTION=1 \
+POETRY_VERSION=1.8
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install "poetry==$POETRY_VERSION"
 
+COPY poetry.lock pyproject.toml ./
+
+RUN poetry config virtualenvs.in-project true && \
+poetry install --only=main --no-root
+
+FROM base AS final
+
+RUN adduser -u 1000 python
+
+USER python
+
+ENV ADDRESS=0.0.0.0 \
+    PORT=7979 \
+    DEBUG=false
+
+COPY --from=builder /src/.venv ./.venv
 COPY constants/ ./constants/
 COPY app/ ./app/
 COPY main.py .
 
 EXPOSE 7979
 
-ENTRYPOINT ["/usr/local/bin/python", "./main.py"]
+ENTRYPOINT ["/src/.venv/bin/python3", "./main.py"]
