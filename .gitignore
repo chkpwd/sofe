@@ -20,3 +20,6 @@ venv.bak/
 
 # ide files
 .idea/
+
+# Ruff
+.ruff_cache/
