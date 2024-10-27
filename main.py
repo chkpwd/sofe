@@ -35,7 +35,7 @@ if __name__ == "__main__":
         create_plex_collection(fillers=fillers_from_api)
 
     for episode in sonarr_episodes_id:
-        if episode["episode_number"] not in fillers_from_api:
+        if episode["absolute_episode_number"] not in fillers_from_api:
             episodes_to_monitor.append(episode.get("id"))
 
     logging.debug("Non-Filler Episodes: %s", episodes_to_monitor)
