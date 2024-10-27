@@ -19,7 +19,7 @@ def create_plex_collection(fillers: list[int] = []):
 
     media: ShowSection = plex.library.section(title=var.plex_anime_library)
 
-    shows: MediaContainer = media.search(title=var.afl_anime_name)
+    shows: MediaContainer = media.search(title=var.plex_anime_name)
 
     for show in shows:
         plex_episodes: list[Episode] = show.episodes()

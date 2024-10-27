@@ -27,6 +27,7 @@ class UserConfig:
         plex_token (str): The token for the Plex server. Optional.
         create_plex_collection (bool): Whether or not to create a Plex collection for the anime. Defaults to False.
         plex_anime_library (str): The name of the Plex library to add the anime collection to.
+        plex_anime_name (str): The name of the anime as shown in Plex.
     """
 
     def __init__(self):
@@ -47,6 +48,7 @@ class UserConfig:
             self._get_env_var("CREATE_PLEX_COLLECTION", required=True, default="False")
         )
         self.plex_anime_library: str = self._get_env_var("PLEX_ANIME_LIBRARY")
+        self.plex_anime_name: str = self._get_env_var("PLEX_ANIME_NAME")
 
     @staticmethod
     def _get_env_var(
