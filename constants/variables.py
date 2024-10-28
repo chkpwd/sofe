@@ -38,11 +38,11 @@ class UserConfig:
         self.monitor_non_filler_sonarr_episodes: bool = to_bool(
             self._get_env_var("MONITOR_NON_FILLER_SONARR_EPISODES", required=True, default="True")
         )
-        self.plex_url: str = self._get_env_var("PLEX_URL")
-        self.plex_token: str = self._get_env_var("PLEX_TOKEN")
         self.create_plex_collection: bool = to_bool(
             self._get_env_var("CREATE_PLEX_COLLECTION", required=True, default="False")
         )
+        self.plex_url: str = self._get_env_var("PLEX_URL")
+        self.plex_token: str = self._get_env_var("PLEX_TOKEN")
         self.plex_anime_library: str = self._get_env_var("PLEX_ANIME_LIBRARY")
         self.plex_anime_name: str = self._get_env_var("PLEX_ANIME_NAME")
 
