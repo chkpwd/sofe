@@ -16,8 +16,6 @@ class UserConfig:
     Configuration constants for the application.
 
     Attributes:
-        listen_address (str): The IP address to listen on. Defaults to 0.0.0.0.
-        listen_port (int): The port to listen on. Defaults to 7979.
         afl_anime_name (str): The name of the anime to fetch filler episodes for.
         sonarr_url (str): The URL of the Sonarr server.
         sonarr_series_id (int): The ID of the Sonarr series to update.
@@ -31,8 +29,6 @@ class UserConfig:
     """
 
     def __init__(self):
-        self.listen_address: str = self._get_env_var("ADDRESS", default="0.0.0.0")
-        self.listen_port: int = int(self._get_env_var("PORT", default="7979"))
         self.afl_anime_name: str = self._get_env_var("AFL_ANIME_NAME", required=True)
         self.sonarr_url: str = self._get_env_var("SONARR_URL", required=True)
         self.sonarr_series_id: int = int(
