@@ -9,7 +9,8 @@
   <picture><img alt="GitHub Issues or Pull Requests" src="https://img.shields.io/github/issues/chkpwd/sofe?style=flat&logo=github&logoColor=white"></picture>
   <picture><img alt="GitHub License" src="https://img.shields.io/github/license/chkpwd/sofe?style=flat"></picture>
 </p>
-SoFE (Sonarr Anime Filler Excluder) is a Python application that configures Sonarr to monitor only non-filler anime episodes sourced from [AnimeFillerList](https://www.animefillerlist.com/). It also creates separate Plex collections for non-filler and filler episodes, depending on the download status.
+
+SoFE (Sonarr Anime Filler Excluder) is a Python application that configures Sonarr to monitor only non-filler anime episodes sourced from [Anime Filler List](https://www.animefillerlist.com). It also creates separate Plex collections for non-filler and filler episodes, depending on the download status.
 
 ## Features
 
@@ -52,3 +53,4 @@ docker run --rm -p 7979:7979 \
   -e PLEX_ANIME_LIBRARY="<your_plex_anime_library>" \
   ghcr.io/chkpwd/sofe:latest
 ```
+[
