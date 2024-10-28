@@ -3,6 +3,8 @@ import logging
 
 from constants.variables import UserConfig
 
+logger = logging.getLogger(__name__)
+
 var = UserConfig()
 
 CONFIGURATION = sonarr.Configuration(host=var.sonarr_url)
@@ -30,7 +32,7 @@ def get_sonarr_episodes(series_id: int):
                         "absolute_episode_number": item.absolute_episode_number
                     })
         except Exception as e:
-            logging.error("Exception when calling EpisodeApi->list_episode: %s\n" % e)
+            logger.error("Exception when calling EpisodeApi->list_episode: %s\n" % e)
 
         return episodes
 
@@ -50,6 +52,6 @@ def configure_monitoring(monitored_list: list[int]):
                 episodes_monitored_resource=episodes_monitored_resource
             )
         except Exception as e:
-            logging.error(
+            logger.error(
                 "Exception when calling EpisodeApi->put_episode_monitor: %s\n" % e
             )

@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 
 load_dotenv(dotenv_path=".env.priv")
 
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 
 class UserConfig:
@@ -55,10 +55,10 @@ class UserConfig:
         """Helper method to get and validate environment variables."""
         value = os.environ.get(key, default)
         if required and value is None:
-            logging.error(f"{key} must be set")
+            logger.error(f"{key} must be set")
             sys.exit(1)
         try:
             return value
         except ValueError:
-            logging.error(f"Invalid value for {key}: {value}")
+            logger.error(f"Invalid value for {key}: {value}")
             sys.exit(1)

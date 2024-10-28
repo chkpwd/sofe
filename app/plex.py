@@ -8,7 +8,7 @@ from constants.variables import UserConfig
 
 var = UserConfig()
 
-logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 plex = PlexServer(baseurl=var.plex_url, token=var.plex_token)
 
@@ -42,4 +42,4 @@ def create_plex_collection(collection_items: list[str] = []):
                         items=items,
                     )
                 else:
-                    logging.info(f"No {collection_name.split(' - ')[1].lower()} found.")
+                    logger.info(f"No {collection_name.split(' - ')[1].lower()} found.")

@@ -1,7 +1,9 @@
-from lxml import html
 import logging
 import requests
 
+from lxml import html
+
+logger = logging.getLogger(__name__)
 
 def get_anime_filler_list(afl_anime_name: str):
     """Get the anime filler list."""
@@ -21,7 +23,7 @@ def get_anime_filler_list(afl_anime_name: str):
         else:
             fillers.append(int(text))
 
-    if logging.getLogger().getEffectiveLevel() == logging.DEBUG:
-        logging.debug(filler_ranges)
+    if logger.getEffectiveLevel() == logging.DEBUG:
+        logger.debug(filler_ranges)
 
     return fillers
