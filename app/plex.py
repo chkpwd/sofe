@@ -12,8 +12,7 @@ logging.basicConfig(level=logging.INFO)
 
 plex = PlexServer(baseurl=var.plex_url, token=var.plex_token)
 
-
-def create_plex_collection(fillers: list[int] = []):
+def create_plex_collection(collection_items: list[str] = []):
     nonfillers_items: list[Episode] = []
     fillers_items: list[Episode] = []
 
@@ -25,7 +24,7 @@ def create_plex_collection(fillers: list[int] = []):
         plex_episodes: list[Episode] = show.episodes()
 
         for episode in plex_episodes:
-            if episode.episodeNumber not in fillers:
+            if episode.seasonEpisode in collection_items:
                 nonfillers_items.append(episode)
             else:
                 fillers_items.append(episode)

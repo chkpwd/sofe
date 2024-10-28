@@ -35,7 +35,7 @@ def get_sonarr_episodes(series_id: int):
         return episodes
 
 
-def configure_monitoring(monitored_list: list):
+def configure_monitoring(monitored_list: list[int]):
     """Configure the sonarr episodes to be monitored."""
     with sonarr.ApiClient(configuration=CONFIGURATION) as api_client:
         api_instance = sonarr.EpisodeApi(api_client)
