@@ -29,7 +29,6 @@ USER python
 ENV DEBUG=false
 
 COPY --from=builder /src/.venv ./.venv
-COPY constants/ ./constants/
 COPY app/ ./app/
 COPY main.py .
 
