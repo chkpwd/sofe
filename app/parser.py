@@ -5,6 +5,7 @@ from lxml import html
 
 logger = logging.getLogger(__name__)
 
+
 def get_anime_filler_list(afl_anime_name: str):
     """Get the anime filler list."""
 

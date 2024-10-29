@@ -4,21 +4,22 @@ from plexapi.video import Episode
 from plexapi.server import PlexServer
 from plexapi.base import MediaContainer
 from plexapi.library import ShowSection
-from constants.variables import UserConfig
 
-var = UserConfig()
+from app.variables import USER_CONFIG
+
 
 logger = logging.getLogger(__name__)
 
-plex = PlexServer(baseurl=var.plex_url, token=var.plex_token)
+plex = PlexServer(baseurl=USER_CONFIG.plex_url, token=USER_CONFIG.plex_token)
+
 
 def create_plex_collection(collection_items: list[str] = []):
     nonfillers_items: list[Episode] = []
     fillers_items: list[Episode] = []
 
-    media: ShowSection = plex.library.section(title=var.plex_anime_library)
+    media: ShowSection = plex.library.section(title=USER_CONFIG.plex_anime_library)
 
-    shows: MediaContainer = media.search(title=var.plex_anime_name)
+    shows: MediaContainer = media.search(title=USER_CONFIG.plex_anime_name)
 
     for show in shows:
         plex_episodes: list[Episode] = show.episodes()
@@ -38,7 +39,7 @@ def create_plex_collection(collection_items: list[str] = []):
                 if items:
                     plex.createCollection(
                         title=collection_name,
-                        section=var.plex_anime_library,
+                        section=USER_CONFIG.plex_anime_library,
                         items=items,
                     )
                 else:

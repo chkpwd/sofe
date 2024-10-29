@@ -2,8 +2,8 @@ import os
 import sys
 import logging
 
-from attrs.converters import to_bool
 from dotenv import load_dotenv
+from attrs.converters import to_bool
 
 
 load_dotenv(dotenv_path=".env.priv")
@@ -16,6 +16,7 @@ class UserConfig:
     Configuration constants for the application.
 
     Attributes:
+        debug (bool): Whether or not to enable debug logging. Defaults to False.
         afl_anime_name (str): The name of the anime to fetch filler episodes for.
         sonarr_url (str): The URL of the Sonarr server.
         sonarr_series_id (int): The ID of the Sonarr series to update.
@@ -29,6 +30,7 @@ class UserConfig:
     """
 
     def __init__(self):
+        self.debug: bool = to_bool(os.environ.get("DEBUG", default="False"))
         self.afl_anime_name: str = self._get_env_var("AFL_ANIME_NAME", required=True)
         self.sonarr_url: str = self._get_env_var("SONARR_URL", required=True)
         self.sonarr_series_id: int = int(
@@ -36,7 +38,9 @@ class UserConfig:
         )
         self.sonarr_api_key: str = self._get_env_var("SONARR_API_KEY", required=True)
         self.monitor_non_filler_sonarr_episodes: bool = to_bool(
-            self._get_env_var("MONITOR_NON_FILLER_SONARR_EPISODES", required=True, default="True")
+            self._get_env_var(
+                "MONITOR_NON_FILLER_SONARR_EPISODES", required=True, default="True"
+            )
         )
         self.create_plex_collection: bool = to_bool(
             self._get_env_var("CREATE_PLEX_COLLECTION", required=True, default="False")
@@ -62,3 +66,6 @@ class UserConfig:
         except ValueError:
             logger.error(f"Invalid value for {key}: {value}")
             sys.exit(1)
+
+
+USER_CONFIG = UserConfig()
