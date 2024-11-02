@@ -1,3 +1,4 @@
+import json
 import logging
 
 
@@ -8,9 +9,9 @@ from app.variables import USER_CONFIG
 
 
 logger = logging.getLogger(__name__)
-logging.basicConfig(level=logger.level, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
-if USER_CONFIG.debug:
+if USER_CONFIG.debug is True:
     logger.setLevel("DEBUG")
 
 
@@ -41,7 +42,7 @@ def main():
     if USER_CONFIG.create_plex_collection is True:
         create_plex_collection(collection_items=episodes_in_season_episode_format)
 
-    logger.debug(f"Non-Filler Episodes: {nonfillers_episodes}")
+    logger.debug(f"Non-Filler Episodes: {json.dumps(nonfillers_episodes, indent=4)}")
 
     if nonfillers_episodes and USER_CONFIG.monitor_non_filler_sonarr_episodes is True:
         configure_monitoring(monitored_list=episodes_to_monitor)

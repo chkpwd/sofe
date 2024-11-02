@@ -53,4 +53,3 @@ docker run --rm -p 7979:7979 \
   -e PLEX_ANIME_LIBRARY="<your_plex_anime_library>" \
   ghcr.io/chkpwd/sofe:latest
 ```
-[
