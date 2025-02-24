@@ -3,7 +3,6 @@ name: Build Exporter
 on:
   push:
     tags: ['v*']
-  pull_request:
   workflow_dispatch:
     inputs:
       push:
