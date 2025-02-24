@@ -526,7 +526,7 @@ files = [
 
 [[package]]
 name = "sonarr"
-version = "1.0.2"
+version = "1.1.0"
 description = "Sonarr"
 optional = false
 python-versions = "^3.8"
@@ -537,13 +537,13 @@ develop = false
 pydantic = ">= 2"
 python-dateutil = ">= 2.8.2"
 typing-extensions = ">= 4.7.1"
-urllib3 = ">= 1.25.3 < 3.0.0"
+urllib3 = ">= 1.25.3, < 3.0.0"
 
 [package.source]
 type = "git"
 url = "https://github.com/devopsarr/sonarr-py.git"
-reference = "main"
-resolved_reference = "b4b0e1e44af85f4c5f1df711965b5f51b30da703"
+reference = "3dc15b8ea0c80e494e336405563006d9fb478a2d"
+resolved_reference = "3dc15b8ea0c80e494e336405563006d9fb478a2d"
 
 [[package]]
 name = "typing-extensions"
@@ -576,4 +576,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "e3e25f5f752eadf60d220d0ec6ffa0d0c35e23bb7753a2ac83a0aea2ddf2d6d1"
+content-hash = "6b27e0d95d07169041a6b59ddb404ce35b1200784a252f54fee6a7c6e8e66c7f"
