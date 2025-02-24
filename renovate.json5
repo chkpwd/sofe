@@ -1,0 +1,15 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: [
+    "github>chkpwd/renovate",
+    "config:recommended",
+    ":semanticCommitTypeAll(chore)"
+  ],
+  packageRules: [
+    {
+      matchDepTypes: "dev",
+      matchUpdateTypes: ["minor", "patch"],
+      automerge: true
+    },
+  ]
+}
