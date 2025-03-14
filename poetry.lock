@@ -542,8 +542,8 @@ urllib3 = ">= 1.25.3, < 3.0.0"
 [package.source]
 type = "git"
 url = "https://github.com/devopsarr/sonarr-py.git"
-reference = "3dc15b8ea0c80e494e336405563006d9fb478a2d"
-resolved_reference = "3dc15b8ea0c80e494e336405563006d9fb478a2d"
+reference = "a3b95b5e7760ac034815dadc4044917a338182b1"
+resolved_reference = "a3b95b5e7760ac034815dadc4044917a338182b1"
 
 [[package]]
 name = "typing-extensions"
@@ -576,4 +576,4 @@ zstd = ["zstandard (>=0.18.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "6b27e0d95d07169041a6b59ddb404ce35b1200784a252f54fee6a7c6e8e66c7f"
+content-hash = "fc48716c50836161fb52ea30047b410afba0f634fdb7ca4784ca3fe867d7825a"
