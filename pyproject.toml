@@ -9,7 +9,7 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.11"
 sonarr = {git = "https://github.com/devopsarr/sonarr-py.git", rev = "b7581f5bcd8c53171746140f4f9998edd0bf4d2e"}
-lxml = "^5.3.0"
+lxml = "^6.0.0"
 requests = "^2.32.3"
 plexapi = "^4.15.16"
 python-dotenv = "^1.0.1"
