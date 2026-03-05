@@ -1,20 +1,19 @@
-[tool.poetry]
+[project]
 name = "sofe"
+version = "0.1.0"
 description = "SoFE performs two primary functions: it monitors non-filler episodes in Sonarr and generates Plex collections."
-authors = ["Bryan Jones <unix.chkpwd@gmail.com>"]
-license = "MIT"
-readme = "README.md"
-package-mode = false
+authors = [{name = "Bryan Jones", email = "unix.chkpwd@gmail.com"}]
+license = {text = "MIT"}
+requires-python = ">=3.11"
+dependencies = [
+    "sonarr@git+https://github.com/devopsarr/sonarr-py.git@b7581f5bcd8c53171746140f4f9998edd0bf4d2e",
+    "lxml>=5.3.0,<6.0.0",
+    "requests>=2.32.3,<3.0.0",
+    "plexapi>=4.15.16,<5.0.0",
+    "python-dotenv>=1.0.1,<2.0.0",
+    "attrs>=25.0.0,<26.0.0",
+    "ty>=0.0.20",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-sonarr = {git = "https://github.com/devopsarr/sonarr-py.git", rev = "b7581f5bcd8c53171746140f4f9998edd0bf4d2e"}
-lxml = "^5.3.0"
-requests = "^2.32.3"
-plexapi = "^4.15.16"
-python-dotenv = "^1.0.1"
-attrs = "^25.0.0"
-
-[build-system]
-requires = ["poetry-core>=1.8"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv]
+dev-dependencies = []
