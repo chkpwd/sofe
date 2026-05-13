@@ -7,18 +7,16 @@ WORKDIR /src
 
 FROM base AS builder
 
-ENV PIP_NO_CACHE_DIR=off \
-    PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PIP_DEFAULT_TIMEOUT=100 \
-    POETRY_NO_INTERACTION=1 \
-    POETRY_VERSION=1.8
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-RUN pip install "poetry==$POETRY_VERSION"
+ENV UV_COMPILE_BYTECODE=1 \
+    UV_LINK_MODE=copy
 
-COPY poetry.lock pyproject.toml ./
+RUN apt-get update && apt-get install -y --no-install-recommends git && rm -rf /var/lib/apt/lists/*
 
-RUN poetry config virtualenvs.in-project true && \
-    poetry install --only=main
+COPY pyproject.toml uv.lock ./
+
+RUN uv sync --frozen --no-install-project --no-dev
 
 FROM base AS final
 
